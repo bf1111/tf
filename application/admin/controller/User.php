@@ -10,7 +10,7 @@ class User extends Controller
 
     public function initialize()
     {
-        session('token','111','admin');
+        // session('token','111','admin');
         if(!session('token','','admin')){
             echo show(10,'请登录');
             exit;
@@ -18,6 +18,7 @@ class User extends Controller
         //User模板
         $this->obj = model("User");
     }
+    
     /**
      * 添加用户操作
      *
