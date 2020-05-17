@@ -79,6 +79,13 @@ class User extends Model
         return $this->save($data, ['id' => $id]);
     }
 
+    
+    /**
+     * 用户删除
+     *
+     * @param [type] $id 用户id
+     * @return void
+     */
     public function userDelete($id)
     {
         return $this->save(['list_status' => -1], ['id' => $id]);
@@ -104,6 +111,24 @@ class User extends Model
         //通过邮箱搜索
         if($searchType == 4){
             return $this->where(['email' => $search, 'list_status' => 1])->paginate(25);
+        }
+    }
+
+    /**
+     * 用户编辑的是否判断数据是否存在
+     *
+     * @param [type] $list  字段
+     * @param [type] $data  判断的数据
+     * @param [type] $id   跳过的id
+     * @return void
+     */
+    public function userEditExist($list,$data,$id)
+    {
+        $res = $this->where($list, $data)->where('id','<>',$id)->find();
+        if ($res) {
+            return true;
+        } else {
+            return false;
         }
     }
 }

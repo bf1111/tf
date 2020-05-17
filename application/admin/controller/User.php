@@ -136,13 +136,13 @@ class User extends Controller
         // }
 
         //判断手机号是否已被注册
-        if ($this->obj->dataExist('phone', $data['phone'])) {
+        if ($this->obj->userEditExist('phone', $data['phone'],$data['id'])) {
             echo show('2', '该手机号已被注册');
             exit;
         }
 
         //判断邮箱是否已被注册
-        if ($this->obj->dataExist('email', $data['email'])) {
+        if ($this->obj->userEditExist('email', $data['email'],$data['id'])) {
             echo show('2', '该邮箱已被注册');
             exit;
         }
