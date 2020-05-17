@@ -10,7 +10,8 @@ class User extends Validate
         'name' => [
             'require',
             'min' => 6,
-            'max' => 10
+            'max' => 10,
+            '/^[A-Za-z0-9]+$/'
         ],
         'password' => [
             'require',
@@ -43,6 +44,7 @@ class User extends Validate
         'name.require' => '用户名不能为空',
         'name.min' => '用户名长度最少6个字符',
         'name.max' => '用户名长度最多10个字符',
+        'name./^[A-Za-z0-9]+$/' => '只能输入数字和字母',
         'password.require' => '密码不能为空',
         'password.min' => '密码长度最少8个字符',
         'password.max' => '密码长度最少16个字符',
