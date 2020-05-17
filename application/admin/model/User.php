@@ -124,7 +124,7 @@ class User extends Model
      */
     public function userEditExist($list,$data,$id)
     {
-        $res = $this->where($list, $data)->where('id','<>',$id)->find();
+        $res = $this->where($list,$data)->where('id','neq',$id)->find();
         if ($res) {
             return true;
         } else {
