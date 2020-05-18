@@ -23,4 +23,8 @@ return [
     'type'           => '',
     // 是否自动开启 SESSION
     'auto_start'     => true,
+
+    'use_trans_sid' => 1,
+
+    'use_cookies'  => true
 ];
