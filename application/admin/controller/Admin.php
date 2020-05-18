@@ -47,7 +47,6 @@ class Admin extends Controller
             $token = $Base->setToken();
             session('token',$token);
             echo show(0,'登录成功',$token);
-            exit;
         }else{
             echo show(2,'密码不正确');
             exit;
