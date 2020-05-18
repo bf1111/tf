@@ -10,6 +10,7 @@ class User extends Controller
 
     public function initialize()
     {
+        session('token','111');
         if(!session('token')){
             // echo show(10,'请登录');
             echo "空";
