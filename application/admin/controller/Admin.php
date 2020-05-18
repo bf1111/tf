@@ -14,6 +14,11 @@ class Admin extends Controller
         $this->obj = model('Admin');
     }
 
+    /**
+     * 管理员登录
+     *
+     * @return void
+     */
     public function adminLogin()
     {
         //判断请求类型

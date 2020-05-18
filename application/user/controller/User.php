@@ -72,9 +72,9 @@ class User extends Controller
         //数据入库
         $res = $this->obj->userPut($data);
         if ($res) {
-            echo show(0, '用户添加成功');
+            echo show(0, '注册成功');
         } else {
-            echo show(2, "用户添加失败");
+            echo show(2, "注册失败");
         }
     }
 

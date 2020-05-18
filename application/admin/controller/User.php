@@ -10,9 +10,12 @@ class User extends Controller
 
     public function initialize()
     {
-        // session('token','111','admin');
         if(!session('token','','admin')){
-            echo show(10,'请登录');
+            // echo show(10,'请登录');
+            echo "空";
+            exit;
+        }else{
+            echo session('token','','admin');
             exit;
         }
         //User模板
