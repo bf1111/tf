@@ -105,10 +105,4 @@ class Admin extends Controller
             echo show(2,'添加失败');
         }
     }
-
-    public function test()
-    {
-        session('test','111');
-        echo session('test','');
-    }
 }

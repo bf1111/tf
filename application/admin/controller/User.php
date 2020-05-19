@@ -10,14 +10,10 @@ class User extends Controller
 
     public function initialize()
     {
-        // if(!session('token','','admin')){
-        //     // echo show(10,'请登录');
-        //     echo "空";
-        //     exit;
-        // }else{
-        //     echo session('token','','admin');
-        //     exit;
-        // }
+        if(!session('token')){
+            echo show(10,'请登录');
+            exit;
+        }
         //User模板
         $this->obj = model("User");
     }
