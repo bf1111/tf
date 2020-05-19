@@ -50,7 +50,7 @@ class User extends Model
             "list_status" => 1
         ];
         $order = [
-            "id" => "desc"
+            "id" => "asc"
         ];
         return $this->where($data)->order($order)->paginate($number);
     }
