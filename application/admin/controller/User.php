@@ -201,4 +201,13 @@ class User extends Controller
             echo show(2, "未选择搜索类型或搜索内容为空");
         }
     }
+
+    public function test1()
+    {
+        if(session('test')){
+            echo session('test')."存在";
+        }else{
+            echo '不存在';
+        }
+    }
 }
