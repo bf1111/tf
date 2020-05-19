@@ -29,26 +29,26 @@ class Admin extends Controller
 
         //验证器 验证数据
         $validate = validate('Admin');
-        if(!$validate->scene('login')->check($data)){
-            echo show('2',$validate->getError());
+        if (!$validate->scene('login')->check($data)) {
+            echo show('2', $validate->getError());
             exit;
         }
 
         //判断账号是否存在
         $res = $this->obj->userExist($data['name']);
-        if(!$res){
-            echo show('2','用户不存在');
+        if (!$res) {
+            echo show('2', '用户不存在');
             exit;
         }
 
         //判断密码是否正确
-        if(md5($data['password'].$res['code']) == $res['password']){
+        if (md5($data['password'] . $res['code']) == $res['password']) {
             $Base = new Base;  //实力换Base对象
             $token = $Base->setToken();
-            session('token',$token);
-            echo show(0,'登录成功',$token);
-        }else{
-            echo show(2,'密码不正确');
+            session('token', $token);
+            echo show(0, '登录成功', $token);
+        } else {
+            echo show(2, '密码不正确');
             exit;
         }
     }
@@ -80,16 +80,16 @@ class Admin extends Controller
         }
 
         //判断两次密码是否一致
-        if($data['password'] != $data['repassword']){
-            echo show(2,'两次密码不一致');
+        if ($data['password'] != $data['repassword']) {
+            echo show(2, '两次密码不一致');
             exit;
         }
 
         //获取添加者
-        $adminId = session('admin.id','','admin');
-        if($adminId){
+        $adminId = session('admin.id', '', 'admin');
+        if ($adminId) {
             $data['add_user_id'] = $adminId;
-        }else{
+        } else {
             $data['add_user_id'] = 0;
         }
 
@@ -99,10 +99,18 @@ class Admin extends Controller
 
         //数据入库
         $res = $this->obj->addAdmins($data);
-        if($res){
-            echo show(0,'添加成功');
-        }else{
-            echo show(2,'添加失败');
+        if ($res) {
+            echo show(0, '添加成功');
+        } else {
+            echo show(2, '添加失败');
         }
+    }
+
+    public function test()
+    {
+        $Base = new Base;  //实力换Base对象
+        $token = $Base->setToken();
+        session('token', $token);
+        echo session('token');
     }
 }
