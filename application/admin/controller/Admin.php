@@ -46,6 +46,7 @@ class Admin extends Controller
             $Base = new Base;  //实力换Base对象
             $token = $Base->setToken();
             session('token', $token);
+            session('admin', $res);
             echo show(0, '登录成功', $token);
         } else {
             echo show(2, '密码不正确');
@@ -106,11 +107,18 @@ class Admin extends Controller
         }
     }
 
-    public function test()
+    /**
+     * 管理员退出
+     *
+     * @return void
+     */
+    public function loginout()
     {
-        $Base = new Base;  //实力换Base对象
-        $token = $Base->setToken();
-        session('token', $token);
-        echo session('token');
+        session(null);
+        if (empty(session('admin')) && empty(session('token'))) {
+            echo show(9, '成功退出');
+        } else {
+            echo show(2, '服务端错误');
+        }
     }
 }

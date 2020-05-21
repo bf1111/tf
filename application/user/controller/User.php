@@ -21,7 +21,7 @@ class User extends Controller
     }
 
     /**
-     * 添加用户操作
+     * 用户注册
      *
      * @return void
      */
@@ -110,6 +110,7 @@ class User extends Controller
             $Token = new Token();
             $token = $Token->setToken();
             session('token',$token,'index');
+            session('user',$res);
             
             //更新数据库信息
             $this->obj->updateLogin($res['id']);
@@ -120,5 +121,15 @@ class User extends Controller
             echo show(2,'密码错误');
             exit;
         }
+    }
+
+    public function loginout()
+    {
+        session(null);
+        if(empty(session('user')) && empty(session('token'))){
+            echo show(9,'成功退出');
+        }else{
+            echo show(2,'服务端错误');
+        }   
     }
 }
