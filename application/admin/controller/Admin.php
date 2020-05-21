@@ -45,6 +45,8 @@ class Admin extends Controller
         if (md5($data['password'] . $res['code']) == $res['password']) {
             $Base = new Base;  //实力换Base对象
             $token = $Base->setToken();
+            //更新数据库
+            $this->obj->updateLastTime($res['id']);
             session('token', $token);
             session('admin', $res);
             echo show(0, '登录成功', $token);

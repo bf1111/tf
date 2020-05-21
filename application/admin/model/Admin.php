@@ -27,4 +27,17 @@ class Admin extends Model
         $data['ctime'] = time();
         return $this->allowField(true)->save($data);
     }
+
+    /**
+     * 最后登录数据更新
+     *
+     * @param [type] $id
+     * @return void
+     */
+    public function updateLastTime($id)
+    {
+        $data['last_ip'] = $_SERVER['REMOTE_ADDR'];  //更新ip
+        $data['last_time'] = time();
+        $this->save($data,['id'=>$id]);
+    }
 }
