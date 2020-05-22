@@ -80,7 +80,7 @@ class GoodsCategory extends Model
     }
 
     /**
-     * 圣品分类编辑的是否判断数据是否存在
+     * 商品分类编辑的是否判断数据是否存在
      *
      * @param [type] $list  字段
      * @param [type] $data  判断的数据
@@ -97,5 +97,9 @@ class GoodsCategory extends Model
         }
     }
 
+    public function getTwoCatagory($array)
+    {
+        return $this->where('list_status',1)->where('parent_id','in',$array)->select();
+    }
 
 }

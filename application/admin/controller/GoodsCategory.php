@@ -106,7 +106,7 @@ class GoodsCategory extends Model
 
         //处理数据
         if (!$id) {
-            echo show(0,'数据不合法');
+            echo show(0, '数据不合法');
             exit;
         }
 
@@ -161,7 +161,7 @@ class GoodsCategory extends Model
         }
 
         //判断数据分类名称是否存在
-        if($this->obj->categoryNameExist($data['name'], $data['id'])){
+        if ($this->obj->categoryNameExist($data['name'], $data['id'])) {
             echo show('2', '该商品分类名称已经存在');
             exit;
         }
@@ -173,5 +173,25 @@ class GoodsCategory extends Model
         } else {
             echo show(2, '编辑失败');
         }
+    }
+
+    /**
+     * 一级二级分类数据显示
+     *
+     * @return void
+     */
+    public function oneTwoCategory()
+    {
+        $dataId = [];
+        $data = $this->obj->categoryShow(0);
+        for($i=0;$i<count($data);$i++)
+        {
+            $dataId[] = $data[$i]['id'];
+        }
+        
+        $data_2 = $this->obj->getTwoCatagory($dataId);
+        
+        echo show(0,'',[$data,$data_2]);
+        exit;
     }
 }
