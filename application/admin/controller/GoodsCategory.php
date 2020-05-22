@@ -15,6 +15,12 @@ class GoodsCategory extends Model
      */
     public function initialize()
     {
+        session('token', '111');
+        if (!session('token')) {
+            echo show(10, '请登录');
+            exit;
+        }
+        //User模板
         $this->obj = model('GoodsCategory');
     }
 
@@ -82,6 +88,90 @@ class GoodsCategory extends Model
             echo show(0, '添加成功');
         } else {
             echo show(2, '服务端错误,添加失败');
+        }
+    }
+
+    /**
+     * 商品分类删除
+     *
+     * @return void
+     */
+    public function categoryDelete()
+    {
+        //判断请求类型  get
+        requestGet();
+
+        //接收数据
+        $id = input('get.id');
+
+        //处理数据
+        if (!$id) {
+            echo show(0,'数据不合法');
+            exit;
+        }
+
+        $res = $this->obj->categoryDel($id);
+        if ($res) {
+            echo show(0, '删除成功');
+        } else {
+            echo show(2, '删除失败');
+        }
+    }
+
+    /**
+     * 分类编辑(数据显示) 
+     *
+     * @return void
+     */
+    public function getEditCategory()
+    {
+        //判断请求类型  GET
+        requestGet();
+
+        //接收数据
+        $id = input('get.id');
+
+        if ($id) {
+            //数据库  查询用户信息
+            $data = $this->obj->getOneCategory($id);
+            echo show(0, "", $data);
+        } else {
+            echo show(2, "数据错误");
+        }
+    }
+
+    /**
+     * 分类编辑(数据更新)
+     *
+     * @return void
+     */
+    public function userEditPost()
+    {
+        //判断请求类型  POST
+        requestPost();
+
+        //接收数据
+        $data = input('post.');
+
+        //验证器 验证数据
+        $validate = validate('GoodsCategory');
+        if (!$validate->scene('add')->check($data)) {
+            echo show(2, $validate->getError());
+            exit;
+        }
+
+        //判断数据分类名称是否存在
+        if($this->obj->categoryNameExist($data['name'], $data['id'])){
+            echo show('2', '该商品分类名称已经存在');
+            exit;
+        }
+
+        //更新数据
+        $res = $this->obj->updateCategory($data, $data['id']);
+        if ($res) {
+            echo show(0, '编辑成功');
+        } else {
+            echo show(2, '编辑失败');
         }
     }
 }

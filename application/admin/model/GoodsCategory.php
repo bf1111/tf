@@ -35,8 +35,67 @@ class GoodsCategory extends Model
      * @param [type] $name
      * @return void
      */
-    public function categoryExist($list,$value)
+    public function categoryExist($list, $value)
     {
-        return $this->where($list,$value)->find();
+        return $this->where($list, $value)->find();
     }
+
+    /**
+     * 商品分类删除
+     *
+     * @param [type] $id  商品id
+     * @return void
+     */
+    public function categoryDel($id)
+    {
+        return $this->save(['list_status' => -1], ['id' => $id]);
+    }
+
+    /**
+     * 返回一条分类数据
+     *
+     * @param [type] $id  分类id
+     * @return void
+     */
+    public function getOneCategory($id)
+    {
+        $data = [
+            'id' => $id,
+            'list_status' => 1
+        ];
+        return $this->where($data)->find();
+    }
+
+    /**
+     * 商品分类数据更新
+     *
+     * @param [type] $data  更新数据
+     * @param [type] $id   商品分类id
+     * @return void
+     */
+    public function updateCategory($data, $id)
+    {
+        $data['edit_time'] = time();
+        return $this->save($data, ['id' => $id]);
+    }
+
+    /**
+     * 圣品分类编辑的是否判断数据是否存在
+     *
+     * @param [type] $list  字段
+     * @param [type] $data  判断的数据
+     * @param [type] $id   跳过的id
+     * @return void
+     */
+    public function categoryNameExist($data, $id)
+    {
+        $res = $this->where(['name' => $data, 'list_status' => 1])->where('id', 'neq', $id)->find();
+        if ($res) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
 }
