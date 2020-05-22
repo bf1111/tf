@@ -35,8 +35,8 @@ class GoodsCategory extends Model
      * @param [type] $name
      * @return void
      */
-    public function categoryExist($name)
+    public function categoryExist($list,$value)
     {
-        return $this->where('name',$name)->find();
+        return $this->where($list,$value)->find();
     }
 }
