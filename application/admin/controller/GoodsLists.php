@@ -12,6 +12,12 @@ class GoodsLists extends Controller
     //初始化
     public function initialize()
     {
+        //判断是否登录
+        if (!session('token')) {
+            echo show(10, '请登录');
+            exit;
+        }
+
         $this->category = model('GoodsCategory');  //商品分类模型实例化
         $this->lists = model('GoodsLists');   //商品模型实例化
     }

@@ -15,7 +15,7 @@ class GoodsCategory extends Model
      */
     public function initialize()
     {
-        session('token', '111');
+        // session('token', '111');
         if (!session('token')) {
             echo show(10, '请登录');
             exit;
