@@ -216,8 +216,6 @@ class User extends Controller
                 return $note['msg'];
             }
         }
-        
-        // echo time();
     }
 
     /**
