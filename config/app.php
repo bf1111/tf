@@ -142,4 +142,9 @@ return [
     // 异常处理handle类 留空使用 \think\exception\Handle
     'exception_handle'       => '',
 
+    //修改为您的apikey(https://www.yunpian.com)登录官网后获取
+    'apikey' => '7b3c91f7ac1852fcb3e807390ef6b715',
+    //验证码内容
+    'text_start' => '【王均峰test】您的验证码为',
+    'text_end' => '，如非本人操作请忽略。'
 ];

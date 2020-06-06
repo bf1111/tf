@@ -36,6 +36,10 @@ class User extends Validate
             'require',
             'min' => 1,
             'max' => 10
+        ],
+        'code' => [
+            'require',
+            '/^\d{6}$/'
         ]
     ];
 
@@ -55,13 +59,16 @@ class User extends Validate
         'phone./^1[3-8]{1}[0-9]{9}$/' => '请输入正确的手机号',
         'username.require' => '昵称不能为空',
         'username.min' => '昵称最少1个字符',
-        'username.max' => '昵称长度最多10个字符'
+        'username.max' => '昵称长度最多10个字符',
+        'code.require' => '验证码不能为空',
+        'code./^\d{6}$/' => '请输入六位数字的验证码'
     ];
 
     //验证场景
     protected $scene = [
-        'register' => ['name','password','repassword','email','phone'],
+        'register' => ['name','password','repassword','email','phone','code'],
         'login' => ['name','password'],
-        'edit' => ['username','password','email','phone']
+        'edit' => ['username','password','email','phone'],
+        'note' => 'phone'
     ];
 }
