@@ -190,14 +190,34 @@ class User extends Controller
      */
     public function sendNotes($code, $mobile)
     {
-        $Note = new Note();
-        $text = config('text_start') . $code . config('text_end');
-        $note = $Note->sendNote(config('apikey'), $mobile, $text);
-        if ($note['code'] == 0) {
-            return true;
-        } else {
-            return $note['msg'];
+        //本次能否发送
+        $flag = false;
+        if(empty(session('send_last_time'))){
+            $flag = true;
+        }else{
+            $nowTime = time();
+            if($nowTime - session('send_last_time') > 60){
+                $flag = true;
+            }
         }
+
+        //能否发送
+        if(!$flag){
+            echo show('2','请不要频繁点击');
+            exit;
+        }else{
+            $Note = new Note();
+            $text = config('text_start') . $code . config('text_end');
+            $note = $Note->sendNote(config('apikey'), $mobile, $text);
+            session('send_last_time',time());
+            if ($note['code'] == 0) {
+                return true;
+            } else {
+                return $note['msg'];
+            }
+        }
+        
+        // echo time();
     }
 
     /**
