@@ -34,4 +34,9 @@ class ImgUpload extends Controller
             return show(2, $file->getError());
         }
     }
+
+    public function index()
+    {
+        return $this->fetch();
+    }
 }
